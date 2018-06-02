@@ -45,7 +45,11 @@
         created() {
             // Listen to the toolbar events
             MediaManager.Event.listen('onClickCreateFolder', () => this.$store.commit(types.SHOW_CREATE_FOLDER_MODAL));
-            MediaManager.Event.listen('onClickDelete', () => this.$store.dispatch('deleteSelectedItems'));
+            MediaManager.Event.listen('onClickDelete', () => {
+                //this.$store.dispatch('deleteSelectedItems')
+                this.$store.commit(types.SELECT_BROWSER_ITEM, this.item);
+                this.$store.commit(types.SHOW_CONFIRM_DELETE_MODAL);
+            });
         },
         mounted() {
             // Set the full height and add event listener when dom is updated
